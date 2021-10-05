@@ -15,6 +15,7 @@ $(document).ready(function () {
       student += "<td>" + value.name + "</td>";
 
       student += "<td>" + value.dink + "</td>";
+      student += "<td>" + value.time + "</td>";
       student += "</tr>";
     });
 
