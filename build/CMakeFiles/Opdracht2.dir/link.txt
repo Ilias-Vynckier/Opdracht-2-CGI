@@ -1,1 +1,1 @@
-/bin/g++-8  -g  -rdynamic CMakeFiles/Opdracht2.dir/main.cpp.o  -o Opdracht2 
+/bin/gcc-8 -g  -rdynamic CMakeFiles/Opdracht2.dir/main.c.o  -o Opdracht2 
