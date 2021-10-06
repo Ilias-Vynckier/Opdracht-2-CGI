@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/pi/embed2/Opdracht-2-CGI/build",
-  "command": "/bin/g++-8    -g   -o CMakeFiles/Opdracht2.dir/main.cpp.o -c /home/pi/embed2/Opdracht-2-CGI/main.cpp",
-  "file": "/home/pi/embed2/Opdracht-2-CGI/main.cpp"
+  "command": "/bin/gcc-8   -g   -o CMakeFiles/Opdracht2.dir/main.c.o   -c /home/pi/embed2/Opdracht-2-CGI/main.c",
+  "file": "/home/pi/embed2/Opdracht-2-CGI/main.c"
 }
 ]
