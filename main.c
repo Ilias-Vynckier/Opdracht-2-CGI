@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
 #define MAXLEN 80
 #define EXTRA 5
 /* 4 for field name "data", 1 for "=" */
@@ -22,8 +25,50 @@ void unencode(char *src, char *last, char *dest)
     }
     else
       *dest = *src;
-  *dest = '\n';
+  /**dest = '\n';*/
+  *dest = '&';
   *++dest = '\0';
+}
+
+int timeStamp()
+{
+  time_t rawtime;
+  struct tm *timeinfo;
+
+  time(&rawtime);
+  timeinfo = localtime(&rawtime);
+
+  char *foo = asctime(timeinfo); // verwijderd de \n\r die je bij de asctime() is.
+  foo[strlen(foo) - 1] = 0;
+
+  return foo;
+}
+
+int template(int teste, int tijd)
+{
+
+  strcat(teste, tijd);
+  printf("<P>%s", teste);
+
+	int init_size = strlen(teste);
+	char delim[] = "&";
+
+	char *ptr = strtok(teste, delim);
+
+	while(ptr != NULL)
+	{
+		printf("<P>'%s'\n", ptr);
+		ptr = strtok(NULL, delim);
+	}
+
+
+  char tempy[80];
+  sprintf(tempy,"{\"name\":\"test\",\"dink\":\"test\",\"time\":\"%s\"},",tijd);
+  puts(tempy);
+
+  strcpy(teste,tempy);
+
+  return teste;
 }
 
 int main(void)
@@ -41,12 +86,20 @@ int main(void)
   {
     FILE *f;
     fgets(input, len + 1, stdin);
-    unencode(input + EXTRA, input + len, data);
+    unencode(input , input + len, data); // deleted '+ Extra' om 'naam=' te behouden.
     f = fopen(DATAFILE, "a");
     if (f == NULL)
       printf("<P>Sorry, cannot store your data.");
     else
-      fputs(data, f);
+    {
+      int tijd = timeStamp();
+
+      int feest = template(data, tijd);
+
+      printf("<P>dd%s", data);
+      fputs(feest, f);
+    }
+
     fclose(f);
     printf("<P>Thank you! Your contribution has been stored.");
   }
