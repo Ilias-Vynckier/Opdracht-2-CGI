@@ -8,7 +8,8 @@
 /* 4 for field name "data", 1 for "=" */
 #define MAXINPUT MAXLEN + EXTRA + 2
 /* 1 for added line break, 1 for trailing NUL */
-#define DATAFILE "/home/pi/embed2/Opdracht-2-CGI/data.json"
+#define DATAFILE "/var/www/html/data.json"
+//#define DATAFILE "/home/pi/embed2/Opdracht-2-CGI/data.json"
 
 void unencode(char *src, char *last, char *dest)
 {
@@ -46,9 +47,8 @@ int timeStamp()
 
 int template(int teste, int tijd)
 {
-
+  printf("<P>teste %s<BR>", teste); // nie super bien
   strcat(teste, tijd);
-  printf("<P>%s", teste);
 
   int init_size = strlen(teste);
   char delim[] = "&";
@@ -56,14 +56,10 @@ int template(int teste, int tijd)
   char *ptr = strtok(teste, delim);
   char *test = strtok(NULL, delim);
 
-  char tempy[250];
-  sprintf(tempy, ",{\"name\":\"%s\",\"dink\":\"%s\",\"time\":\"%s\"}]", ptr, test, tijd); // kan beter.
+  printf("<P>dink %s<BR>", test + 5); // nie super bien
 
-  while (ptr != NULL)
-  {
-    printf("<P>'%s'\n", ptr);
-    ptr = strtok(NULL, delim);
-  }
+  char tempy[250];
+  sprintf(tempy, ",{\"name\":\"%s\",\"dink\":\"%s\",\"time\":\"%s\"}]", ptr, test + 5, tijd); // kan beter.
 
   puts(tempy);
 
@@ -87,7 +83,7 @@ int main(void)
   {
     FILE *f;
     fgets(input, len + 1, stdin);
-    unencode(input, input + len, data); // deleted '+ Extra' om 'naam=' te behouden.
+    unencode(input + EXTRA, input + len, data); // deleted '+ Extra' om 'naam=' te behouden.
     f = fopen(DATAFILE, "r+");
     if (f == NULL)
       printf("<P>Sorry, cannot store your data.");
@@ -97,18 +93,16 @@ int main(void)
 
       int feest = template(data, tijd);
 
-      printf("<P>dd%s", data);
-
       //////////////////////////////////////
       //https://www.tutorialspoint.com/c_standard_library/c_function_fseek.htm
-      
-      fseek(f, -1, SEEK_END);// zoekt het einde van de file en zet de cursor 1 positie achteruit.
+
+      fseek(f, -1, SEEK_END); // zoekt het einde van de file en zet de cursor 1 positie achteruit.
       //////////////////////////////////////
       fputs(feest, f);
-      
     }
 
     fclose(f);
+    
     printf("<P>Thank you! Your contribution has been stored.");
   }
   return 0;

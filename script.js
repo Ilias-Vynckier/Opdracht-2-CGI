@@ -1,4 +1,4 @@
-fetch("http://ilias/data.json")
+fetch("/home/pi/embed2/Opdracht-2-CGI/data.json")
   .then((response) => response.json())
   .then((data) => console.log(data));
 
@@ -23,3 +23,4 @@ $(document).ready(function () {
     $("#test").append(student);
   });
 });
+
