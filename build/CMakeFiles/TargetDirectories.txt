@@ -1,0 +1,5 @@
+/home/pi/embed2/Opdracht-2-CGI/build/CMakeFiles/edit_cache.dir
+/home/pi/embed2/Opdracht-2-CGI/build/CMakeFiles/package_source.dir
+/home/pi/embed2/Opdracht-2-CGI/build/CMakeFiles/Opdracht2.dir
+/home/pi/embed2/Opdracht-2-CGI/build/CMakeFiles/rebuild_cache.dir
+/home/pi/embed2/Opdracht-2-CGI/build/CMakeFiles/package.dir
