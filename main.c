@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #define MAXLEN 80
 #define EXTRA 5
 /* 4 for field name "data", 1 for "=" */
@@ -26,6 +27,20 @@ void unencode(char *src, char *last, char *dest)
   *++dest = '\0';
 }
 
+int timeStamp()
+{
+  time_t rawtime;
+  struct tm *timeinfo;
+
+  time(&rawtime);
+  timeinfo = localtime(&rawtime);
+
+  char *foo = asctime(timeinfo); // verwijderd de \n\r die je bij de asctime() is.
+  foo[strlen(foo) - 1] = 0;
+
+  return foo;
+}
+
 int main(void)
 {
   char *lenstr;
@@ -46,7 +61,11 @@ int main(void)
     if (f == NULL)
       printf("<P>Sorry, cannot store your data.");
     else
-      fputs(data, f);
+    {
+      int tijd=timeStamp();
+      fputs(tijd, f);
+    }
+
     fclose(f);
     printf("<P>Thank you! Your contribution has been stored.");
   }
