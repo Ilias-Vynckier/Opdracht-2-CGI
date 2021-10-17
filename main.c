@@ -8,7 +8,8 @@
 /* 4 for field name "data", 1 for "=" */
 #define MAXINPUT MAXLEN + EXTRA + 2
 /* 1 for added line break, 1 for trailing NUL */
-#define DATAFILE "/var/www/html/data.json"
+//#define DATAFILE "/var/www/html/data.json"
+#define DATAFILE "/var/www/html/s.json"
 //#define DATAFILE "/home/pi/embed2/Opdracht-2-CGI/data.json"
 
 void unencode(char *src, char *last, char *dest)
@@ -68,11 +69,54 @@ int template(int teste, int tijd)
   return teste;
 }
 
+int filtercookie(char data[])
+{
+
+  int size = strlen(data);
+  int en;
+  char coockie[50];
+  char subbuff[50];
+  int npath;
+
+  for (size_t i = 0; i < size; i++)
+  {
+    //printf("<P>datat arrr %c <BR>", data[i]);
+
+    if (data[i] == '&')
+    {
+      printf("<P>yse  %c <BR>", data[i]);
+      printf("<P>yse  %d <BR>", en);
+      if (en == 2)
+      {
+        printf("<P>yse  %c <BR>", data[i]);
+
+        memcpy(subbuff, &data[i + 8], 49);
+        subbuff[49] = '\0';
+
+        printf("<P>coocky %s<BR>", subbuff);
+        sprintf(npath, "/var/www/html/s.json", subbuff);
+        printf("<P>coock  %s <BR>", npath);
+        en = 0;
+      }
+      en++;
+    }
+  }
+
+  char path = "/var/www/html/data.json";
+
+  //sprintf(npath,"/var/www/html/%s.json",subbuff);
+  printf("<P>dink paht  %s <BR>", npath);
+
+  return npath;
+}
+
 int main(void)
 {
   char *lenstr;
   char input[MAXINPUT], data[MAXINPUT];
   long len;
+  int fname;
+
   printf("%s%c%c\n",
          "Content-Type:text/html;charset=iso-8859-1", 13, 10);
   printf("<TITLE>Response</TITLE>\n");
@@ -84,7 +128,10 @@ int main(void)
     FILE *f;
     fgets(input, len + 1, stdin);
     unencode(input + EXTRA, input + len, data); // deleted '+ Extra' om 'naam=' te behouden.
-    f = fopen(DATAFILE, "r+");
+    //printf("%s",data);
+    fname = filtercookie(data); /// mag er mischien uit
+    //sprintf(fname,"%S",fnamet);
+    f = fopen(data, "w+");
     if (f == NULL)
       printf("<P>Sorry, cannot store your data.");
     else
@@ -102,8 +149,8 @@ int main(void)
     }
 
     fclose(f);
-    
-    printf("<P>Thank you! Your contribution has been stored.");
+
+    printf("<P>Thank you! Your contribution has been stored.%s", fname);
   }
   return 0;
 }

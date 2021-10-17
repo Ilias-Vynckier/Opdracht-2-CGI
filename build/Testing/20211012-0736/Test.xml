@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Linux-g++-8"
+	BuildStamp="20211012-0736-Experimental"
+	Name="Ilias"
+	Generator="ctest-3.16.3"
+	CompilerName="/bin/g++-8"
+	CompilerVersion="8.3.0"
+	OSName="Linux"
+	Hostname="Ilias"
+	OSRelease="5.10.17-v7l+"
+	OSVersion="#1414 SMP Fri Apr 30 13:20:47 BST 2021"
+	OSPlatform="armv7l"
+	Is64Bits="0"
+	VendorString=""
+	VendorID="Unknown Manufacturer"
+	FamilyID="7"
+	ModelID="0"
+	ProcessorCacheSize="0"
+	NumberOfLogicalCPU="4"
+	NumberOfPhysicalCPU="1"
+	TotalVirtualMemory="99"
+	TotalPhysicalMemory="1866"
+	LogicalProcessorsPerPhysical="4"
+	ProcessorClockFrequency="0"
+	>
+	<Testing>
+		<StartDateTime>Oct 12 09:36 CEST</StartDateTime>
+		<StartTestTime>1634024172</StartTestTime>
+		<TestList/>
+		<EndDateTime>Oct 12 09:36 CEST</EndDateTime>
+		<EndTestTime>1634024172</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>
