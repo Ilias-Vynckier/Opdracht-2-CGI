@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--<script src="https://code.jquery.com/jquery-3.5.1.js"></script>-->
-    <script src="script.js"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-      crossorigin="anonymous"
-    />
 
-    <title>Document</title>
-  </head>
-  <body onload="checkCookie()">
-    <table class="table" id="test">
-      <thead>
-        <tr>
-          <td>naam</td>
-          <td>dink</td>
-          <td>tijd</td>
-        </tr>
-      </thead>
-    </table>
-    <form action="http://ilias/cgi-bin/Opdracht2" method="POST">
-      <div>
-        Your input (80 chars max.):<br />
-        <input name="name" size="60" maxlength="80" /><br />
-        <input name="dink" size="60" maxlength="80" /><br />  
-        <input type="SUBMIT" value="Send" onclick="getCookie(username)"/>
-        
-        <input id="cookie" name="cookie" size="60" maxlength="80" style="visibility:collapse;"/><br /> 
-      </div>
-    </form>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--<script src="https://code.jquery.com/jquery-3.5.1.js"></script>-->
+  <script src="script.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+
+  <title>Document</title>
+</head>
+
+<body onload="checkCookie()">
+  <table class="table" id="test">
+    <thead>
+      <tr>
+        <td>naam</td>
+        <td>dink</td>
+        <td>tijd</td>
+      </tr>
+    </thead>
+  </table>
+  <form action="http://ilias/cgi-bin/Opdracht2" method="POST">
+    <div>
+      Your input (80 chars max.):<br />
+      <input name="name" size="60" maxlength="80" /><br />
+      <input name="dink" size="60" maxlength="80" /><br />
+      <input type="SUBMIT" value="Send" onclick="getCookie(username)" />
+
+      <input id="cookie" name="cookie" size="60" maxlength="80" style="visibility:collapse;" /><br/>
+    </div>
+  </form>
+</body>
+
 </html>

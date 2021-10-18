@@ -1,15 +1,13 @@
 var user = getCookie("username");
-fetch("http://ilias/"+user+"&.json")
+fetch("http://ilias/" + user + "&.json")
   .then((response) => response.json())
   .then((data) => tableG(data));
 
-console.log("user: "+user);
-
+console.log("user: " + user);
 
 function tableG(data) {
   var student = "";
   let table = document.getElementById("test")
-
 
   for (let element of data) {
     let row = table.insertRow();
@@ -20,28 +18,6 @@ function tableG(data) {
     }
   }
 }
-
-/*$(document).ready(function () {
-  // FETCHING DATA FROM JSON FILE
-  $.getJSON("http://ilias/data.json", function (data) {
-    var student = "";
-
-    // ITERATING THROUGH OBJECTS
-    $.each(data, function (key, value) {
-      //CONSTRUCTION OF ROWS HAVING
-      // DATA FROM JSON OBJECT
-      student += "<tr>";
-      student += "<td>" + value.name + "</td>";
-
-      student += "<td>" + value.dink + "</td>";
-      student += "<td>" + value.time + "</td>";
-      student += "</tr>";
-    });
-
-    //INSERTING ROWS INTO TABLE
-    $("#test").append(student);
-  });
-});*/
 
 function setCookie(cname, cvalue, exdays) {
   const d = new Date();
@@ -54,7 +30,7 @@ function checkCookie() {
   let user = getCookie("username");
   if (user != "") {
     alert("Welcome again " + user);
-    document.getElementById("cookie").value=user;
+    document.getElementById("cookie").value = user;
   } else {
     user = prompt("Please enter your name:", "");
     if (user != "" && user != null) {
@@ -77,5 +53,3 @@ function getCookie(cname) {
   }
   return "";
 }
-
-

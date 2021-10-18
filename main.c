@@ -8,9 +8,7 @@
 /* 4 for field name "data", 1 for "=" */
 #define MAXINPUT MAXLEN + EXTRA + 2
 /* 1 for added line break, 1 for trailing NUL */
-//#define DATAFILE "/var/www/html/data.json"
 #define DATAFILE "/var/www/html/s.json"
-//#define DATAFILE "/home/pi/embed2/Opdracht-2-CGI/data.json"
 
 void unencode(char *src, char *last, char *dest)
 {
@@ -48,7 +46,6 @@ int timeStamp()
 
 int template(int teste, int tijd)
 {
-  printf("<P>teste %s<BR>", teste); // nie super bien
   strcat(teste, tijd);
 
   int init_size = strlen(teste);
@@ -57,12 +54,8 @@ int template(int teste, int tijd)
   char *ptr = strtok(teste, delim);
   char *test = strtok(NULL, delim);
 
-  printf("<P>dink %s<BR>", test + 5); // nie super bien
-
   char tempy[250];
   sprintf(tempy, ",{\"name\":\"%s\",\"dink\":\"%s\",\"time\":\"%s\"}]", ptr, test + 5, tijd); // kan beter.
-
-  puts(tempy);
 
   strcpy(teste, tempy);
 
@@ -71,44 +64,27 @@ int template(int teste, int tijd)
 
 int filtercookie(char data[])
 {
-
   int size = strlen(data);
   int en;
-  char coockie[50];
   char subbuff[50];
   int npath;
 
   for (size_t i = 0; i < size; i++)
   {
-    //printf("<P>datat arrr %c <BR>", data[i]);
-
     if (data[i] == '&')
     {
-      //printf("<P>yse  %c <BR>", data[i]);
-      //printf("<P>yse  %d <BR>", en);
       if (en == 1)
       {
-        printf("<P>skra  %c <BR>", data[i]);
-
-        memcpy(subbuff, &data[i+8], 49); // werkt enkel nog maar met 4 letter woorden.
+        memcpy(subbuff, &data[i + 8], 49); // filtert de cookie tag weg
         subbuff[49] = '\0';
 
-        printf("<P>coocky %s<BR>", subbuff);
         sprintf(npath, "/var/www/html/%s.json", subbuff);
-        printf("<P>sbuff  %s <BR>", subbuff);
-        printf("<P>npaht  %s <BR>", npath);
         return npath;
         en = 0;
       }
       en++;
     }
   }
-
-  char path = "/var/www/html/data.json";
-
-  //sprintf(npath,"/var/www/html/%s.json",subbuff);
-  printf("<P>dink paht  %s <BR>", npath);
-
   return npath;
 }
 
@@ -130,14 +106,12 @@ int main(void)
     FILE *f;
     fgets(input, len + 1, stdin);
     unencode(input + EXTRA, input + len, data); // deleted '+ Extra' om 'naam=' te behouden.
-    //printf("%s",data);
-    fname = filtercookie(data); /// mag er mischien uit
-    //sprintf(fname,"%S",fnamet);
-
-    if(fopen(fname, "r+")==0){
-       f = fopen(fname, "w+");
-        fputs("[{} ", f); // [{} zorgt voor een leeg element die niet zal tonen op de webpagina en 
-    }                     // zorgt ervoor dat de template niet aangepast moet worden voor de uitbreideing
+    fname = filtercookie(data);                 /// mag er mischien uit
+    if (fopen(fname, "r+") == 0)
+    {
+      f = fopen(fname, "w+");
+      fputs("[{} ", f); // [{} zorgt voor een leeg element die niet zal tonen op de webpagina en
+    }                   // zorgt ervoor dat de template niet aangepast moet worden voor de uitbreideing
     else
       f = fopen(fname, "r+");
     if (f == NULL)
@@ -158,7 +132,7 @@ int main(void)
 
     fclose(f);
 
-    printf("<P>Thank you! Your contribution has been stored.%s", fname);
+    printf("<P>Thank you! Your contribution has been stored.");
   }
   return 0;
 }
