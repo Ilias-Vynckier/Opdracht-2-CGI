@@ -88,14 +88,15 @@ int filtercookie(char data[])
       printf("<P>yse  %d <BR>", en);
       if (en == 2)
       {
-        printf("<P>yse  %c <BR>", data[i]);
+        printf("<P>skra  %c <BR>", data[i]);
 
-        memcpy(subbuff, &data[i + 8], 49);
+        memcpy(subbuff, &data[i - 4], 49);
         subbuff[49] = '\0';
 
         printf("<P>coocky %s<BR>", subbuff);
-        sprintf(npath, "/var/www/html/s.json", subbuff);
-        printf("<P>coock  %s <BR>", npath);
+        sprintf(npath, "/var/www/html/%s.json", subbuff);
+        printf("<P>sbuff  %s <BR>", subbuff);
+        printf("<P>npaht  %s <BR>", npath);
         en = 0;
       }
       en++;
@@ -131,7 +132,7 @@ int main(void)
     //printf("%s",data);
     fname = filtercookie(data); /// mag er mischien uit
     //sprintf(fname,"%S",fnamet);
-    f = fopen(data, "w+");
+    f = fopen(fname, "w+");
     if (f == NULL)
       printf("<P>Sorry, cannot store your data.");
     else
