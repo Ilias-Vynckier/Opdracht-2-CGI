@@ -84,19 +84,20 @@ int filtercookie(char data[])
 
     if (data[i] == '&')
     {
-      printf("<P>yse  %c <BR>", data[i]);
-      printf("<P>yse  %d <BR>", en);
-      if (en == 2)
+      //printf("<P>yse  %c <BR>", data[i]);
+      //printf("<P>yse  %d <BR>", en);
+      if (en == 1)
       {
         printf("<P>skra  %c <BR>", data[i]);
 
-        memcpy(subbuff, &data[i - 4], 49);
+        memcpy(subbuff, &data[i+8], 49); // werkt enkel nog maar met 4 letter woorden.
         subbuff[49] = '\0';
 
         printf("<P>coocky %s<BR>", subbuff);
         sprintf(npath, "/var/www/html/%s.json", subbuff);
         printf("<P>sbuff  %s <BR>", subbuff);
         printf("<P>npaht  %s <BR>", npath);
+        return npath;
         en = 0;
       }
       en++;
@@ -132,7 +133,13 @@ int main(void)
     //printf("%s",data);
     fname = filtercookie(data); /// mag er mischien uit
     //sprintf(fname,"%S",fnamet);
-    f = fopen(fname, "w+");
+
+    if(fopen(fname, "r+")==0){
+       f = fopen(fname, "w+");
+        fputs("[{} ", f); // [{} zorgt voor een leeg element die niet zal tonen op de webpagina en 
+    }                     // zorgt ervoor dat de template niet aangepast moet worden voor de uitbreideing
+    else
+      f = fopen(fname, "r+");
     if (f == NULL)
       printf("<P>Sorry, cannot store your data.");
     else

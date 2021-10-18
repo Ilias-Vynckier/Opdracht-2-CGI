@@ -1,6 +1,9 @@
-fetch("http://ilias/data.json")
+var user = getCookie("username");
+fetch("http://ilias/"+user+"&.json")
   .then((response) => response.json())
   .then((data) => tableG(data));
+
+console.log("user: "+user);
 
 
 function tableG(data) {
